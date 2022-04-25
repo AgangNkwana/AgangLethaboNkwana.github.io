@@ -26,9 +26,9 @@ Moreno has assigned you the first question to answer: How do annual members and 
 
 ### Business task
 
-*Analyze how annual and casual riders use Cyclistic bikes differently
-*Look for reasons why casual members would opt for annaul membership
-*Use digital media to find a way to entice casual members to opt for annual membership
+* Analyze how annual and casual riders use Cyclistic bikes differently
+* Look for reasons why casual members would opt for annaul membership
+* Use digital media to find a way to entice casual members to opt for annual membership
 
 #### Tools
 R programming for data cleaning and Tableau for data Visualization
@@ -46,19 +46,19 @@ I used R to combine the 12 month data and to clean it.Then exported it to a CSV 
 ![Usertype vs WeekDays.](Usertype ,weekdays vs ride length TripdataViz.png)
 
 ### Note:
-*The most popular days to use bikes are weekends starting from Fridays where casual members have the longest ride lengths.
+* The most popular days to use bikes are weekends starting from Fridays where casual members have the longest ride lengths.
 
 ### From the sertype vs Ride type chart
 
 ![Usertype vs Ride type.](Usertype, Ride Length vs Ride Type.png)
 
-*Docked bikes are the most popular among both Casual and Members.
+* Docked bikes are the most popular among both Casual and Members.
 
 ### From the Usertype, Member types vs Months chart
 
 ![Usertype, Member types vs Months.](Usertype, Ride Type vs MONTHS.png)
 
-*There is peak Usage especially for Docked bikes by both casuals and members in the month of April. Which is the month I recommend that advertisers garner their focus on.
+* There is peak Usage especially for Docked bikes by both casuals and members in the month of April. Which is the month I recommend that advertisers garner their focus on.
 
 ## Summary :
 
