@@ -1,0 +1,67 @@
+---
+title: "Cyclistic bike share data cleaning report code"
+output: html_notebook
+---
+
+### using rbind to combine the 12 dataframes
+df_202004_202104 <- rbind(X2020_04_divvy_tripdata,X2020_05_divvy_tripdata,X2020_06_divvy_tripdata,X2020_07_divvy_tripdata,X2020_08_divvy_tripdata,X2020_09_divvy_tripdata,X2020_10_divvy_tripdata,X2020_11_divvy_tripdata,X2020_12_divvy_tripdata,X2021_01_divvy_tripdata,X2021_02_divvy_tripdata,X2021_03_divvy_tripdata,X2021_04_divvy_tripdata)
+
+View(df_202004_202104)
+write.csv(df_202004_202104,"2020_04-2021_04 tripdata.csv")
+
+### View variable names
+glimpse(X2020_04_2021_04_tripdata)
+
+#summary statistics
+head(X2020_04_2021_04_tripdata)
+str(X2020_04_2021_04_tripdata)
+
+### Adding column with week days
+X2020_04_2021_04_tripdata$week_days <- format(as.Date(X2020_04_2021_04_tripdata$started_at),"%A")
+
+#### Arrange trip data by ride Id
+df_tripdata <- X2020_04_2021_04_tripdata %>% 
+  arrange(ride_id)
+View(df_tripdata)
+
+#### remove columns with null values : which resulted in hundreds of thousands of rows of data being removed
+df_tripdata <- na.omit(df_tripdata)
+
+#### rename rideable_type to ride_type
+df_tripdata <- rename(df_tripdata,ride_type = rideable_type)
+
+#### rename member_casual to usertype
+
+df_tripdata <- rename(df_tripdata,usertype = member_casual)
+
+#### add column ride times
+df_tripdata <- mutate(df_tripdata,ride_length = ended_at - started_at)
+
+#### order data by ride length
+
+df_tripdata <- df_tripdata %>% 
+  arrange(ride_length)
+
+#### remove all rows where ride length is negative
+
+df_tripdata <- df_tripdata %>% 
+  filter(ride_length > 0)
+
+#### remove rows where start station id is equal to end station id
+
+df_tripdata <- df_tripdata %>% 
+  filter(start_station_id != end_station_id)
+
+
+#### combine start latitude and end longitude into one column
+df_tripdata <- 
+  unite(df_tripdata,"start_lat_lng",start_lat,start_lng,sep = "")
+
+#### combine end longitude and end end latitude
+df_tripdata <- 
+  unite(df_tripdata,"end_lat_lng",end_lat,end_lng,sep= "")
+  
+   Conclusion:
+  *There are a lot of NA values in the data which reflect poor data capturing and   storing.
+  
+  *Entries where start time dates were older than end time dates had to be     removed, which also indicates poor data storage practices
